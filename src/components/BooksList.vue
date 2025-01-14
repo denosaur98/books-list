@@ -14,7 +14,7 @@
             Книги в каталоге
             <span class="info__count">3</span>
           </h1>
-          <button class="info__add-book">
+          <button class="info__add-book" @click="openPopup">
             <img src="../assets/icons/add.svg">
             Добавить книгу
           </button>
@@ -24,11 +24,18 @@
     <div class="list__place">
       <BookItem />
     </div>
+    <BookPopup v-if="store.state.isPopupOpen"/>
   </div>
 </template>
 
 <script setup>
+import store from '../store/index.js';
 import BookItem from './BookItem';
+import BookPopup from './BookPopup';
+
+function openPopup() {
+  store.commit('openPopup')
+}
 </script>
 
 <style lang="scss" scoped>

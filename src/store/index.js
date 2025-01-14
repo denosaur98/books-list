@@ -2,8 +2,17 @@ import { createStore } from 'vuex'
 
 export default createStore({
 	state() {
-		return {}
+		return {
+			isPopupOpen: false,
+		}
 	},
-	mutations: {},
+	mutations: {
+		openPopup(state) {
+			state.isPopupOpen = true
+		},
+		closePopup(state) {
+			state.isPopupOpen = false
+		},
+	},
 	actions: {},
 })
