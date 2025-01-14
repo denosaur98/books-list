@@ -80,6 +80,13 @@ function closePopup() {
     background: rgb(255, 255, 255);
     gap: 15px;
 
+    @media (max-width: 480px) {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 0;
+    }
+
     .popup__header-wrapper {
       display: flex;
       align-items: flex-start;

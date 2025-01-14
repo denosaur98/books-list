@@ -51,6 +51,10 @@ function openPopup() {
     padding: 15px 40px;
     background: rgb(245, 246, 246);
 
+    @media (max-width: 480px) {
+      padding: 30px;
+    }
+
     .list__header-wrapper {
       display: flex;
       flex-direction: column;
@@ -121,6 +125,7 @@ function openPopup() {
           cursor: pointer;
           display: flex;
           align-items: center;
+          justify-content: center;
           padding: 10px 12px;
           border-radius: 8px;
           background: rgb(28, 125, 65);
@@ -132,6 +137,15 @@ function openPopup() {
           text-align: left;
           border: none;
           gap: 5px;
+
+          @media (max-width: 480px) {
+            position: absolute;
+            bottom: 15px;
+            width: 90%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 997;
+          }
         }
       }
     }
@@ -142,6 +156,10 @@ function openPopup() {
     flex-direction: column;
     padding: 15px 40px;
     gap: 15px;
+
+    @media (max-width: 480px) {
+      padding: 30px;
+    }
   }
 }
 </style>
