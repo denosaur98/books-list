@@ -1,0 +1,21 @@
+@font-face {
+  font-family: Inter;
+  src: url('../fonts/Inter.ttf');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Inter;
+}
+
+input,
+textarea {
+  outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}

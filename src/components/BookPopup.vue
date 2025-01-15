@@ -25,7 +25,7 @@
       </div>
       <div class="popup__item">
         <label class="item__title">Год</label>
-        <input type="text" class="item__input" placeholder="Год выпуска" v-model="bookYear">
+        <input type="number" class="item__input" placeholder="Год выпуска" v-model="bookYear">
       </div>
       <div class="popup__item">
         <label class="item__title">Жанр</label>
