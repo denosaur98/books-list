@@ -2,7 +2,7 @@
   <div class="book-item" v-for="book in store.state.books" :key="book.id">
     <div class="item__header">
       <h1 class="header__title">{{ book.title }}</h1>
-      <button class="header__edit">
+      <button class="header__edit" @click="openEditPopup">
         <img src="../assets/icons/edit.svg">
       </button>
     </div>
@@ -15,6 +15,9 @@
 <script setup>
 import store from '../store/index.js';
 
+function openEditPopup() {
+  store.commit('openEditPopup')
+}
 </script>
 
 <style lang="scss" scoped>

@@ -3,7 +3,8 @@ import { createStore } from 'vuex'
 export default createStore({
 	state() {
 		return {
-			isPopupOpen: false,
+			isAddPopupOpen: false,
+			isEditPopupOpen: false,
 			books: [
 				{
 					id: 1,
@@ -24,11 +25,17 @@ export default createStore({
 		}
 	},
 	mutations: {
-		openPopup(state) {
-			state.isPopupOpen = true
+		openAddPopup(state) {
+			state.isAddPopupOpen = true
 		},
-		closePopup(state) {
-			state.isPopupOpen = false
+		closeAddPopup(state) {
+			state.isAddPopupOpen = false
+		},
+		openEditPopup(state) {
+			state.isEditPopupOpen = true
+		},
+		closeEditPopup(state) {
+			state.isEditPopupOpen = false
 		},
 	},
 	actions: {},

@@ -1,13 +1,17 @@
 <template>
   <div class="book-popup-wrapper">
-    <div class="popup__overlay" @click="closePopup"></div>
+    <div class="popup__overlay" @click="closeAddPopup" v-if="store.state.isAddPopupOpen"></div>
+    <div class="popup__overlay" @click="closeEditPopup" v-else></div>
     <div class="book-popup">
       <div class="popup__header-wrapper">
         <div class="popup__header">
-          <h1 class="header__title">Добавить книгу</h1>
+          <h1 class="header__title">{{ store.state.isAddPopupOpen ? "Добавить книгу" : "Редактирование" }}</h1>
           <p class="header__subtitle">Заполните все поля и добавьте книгу в список</p>
         </div>
-        <button class="header__close-popup" @click="closePopup">
+        <button class="header__close-popup" @click="closeAddPopup" v-if="store.state.isAddPopupOpen">
+          <img src="../assets/icons/close.svg">
+        </button>
+        <button class="header__close-popup" @click="closeEditPopup" v-else>
           <img src="../assets/icons/close.svg">
         </button>
       </div>
@@ -42,8 +46,11 @@
 <script setup>
 import store from '../store/index.js';
 
-function closePopup() {
-  store.commit('closePopup')
+function closeAddPopup() {
+  store.commit('closeAddPopup')
+}
+function closeEditPopup() {
+  store.commit('closeEditPopup')
 }
 </script>
 
