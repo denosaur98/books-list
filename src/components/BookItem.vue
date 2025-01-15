@@ -1,5 +1,5 @@
 <template>
-  <div class="book-item" v-for="book in store.state.books" :key="book.id">
+  <div class="book-item" v-for="book in props.searchItems" :key="book.id">
     <div class="item__header">
       <h1 class="header__title">{{ book.title }}</h1>
       <button class="header__edit" @click="openEditPopup">
@@ -15,11 +15,19 @@
 </template>
 
 <script setup>
+import { defineProps } from 'vue';
 import store from '../store/index.js';
 
 function openEditPopup() {
   store.commit('openEditPopup')
 }
+
+const props = defineProps({
+  searchItems: {
+    type: Array,
+    required: true
+  }
+})
 </script>
 
 <style lang="scss" scoped>

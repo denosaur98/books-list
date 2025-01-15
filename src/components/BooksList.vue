@@ -6,7 +6,7 @@
           <img src="../assets/icons/logo.svg" class="search__logo">
           <div class="search__item-wrapper">
             <img src="../assets/icons/search.svg" class="item__icon">
-            <input type="text" placeholder="Найти ту самую книгу" class="search__item">
+            <input type="text" placeholder="Найти ту самую книгу" class="search__item" v-model="searchValue">
           </div>
         </div>
         <div class="header__info-wrapper">
@@ -22,13 +22,14 @@
       </div>
     </div>
     <div class="list__place">
-      <BookItem />
+      <BookItem :searchItems="searchItems"/>
     </div>
     <BookPopup v-if="store.state.isAddPopupOpen || store.state.isEditPopupOpen"/>
   </div>
 </template>
 
 <script setup>
+import { ref, computed } from 'vue';
 import store from '../store/index.js';
 import BookItem from './BookItem';
 import BookPopup from './BookPopup';
@@ -36,6 +37,13 @@ import BookPopup from './BookPopup';
 function openAddPopup() {
   store.commit('openAddPopup')
 }
+
+const searchValue = ref('')
+const searchItems = computed(() => {
+  return store.state.books.filter(book => {
+    return book.title.toLowerCase().includes(searchValue.value.toLowerCase())
+  })
+})
 </script>
 
 <style lang="scss" scoped>
