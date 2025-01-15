@@ -9,17 +9,23 @@ export default createStore({
 				{
 					id: 1,
 					title: 'Как разговаривать с кем угодно, когда угодно, где угодно',
-					keywords: ['Ларри Кинг', '2011', 'Научпоп'],
+					author: 'Ларри Кинг',
+					year: '2011',
+					genre: 'Научпоп',
 				},
 				{
 					id: 2,
 					title: 'Больше, чем просто красивая. 12 тайных сил женщины, перед которой невозможно устоять',
-					keywords: ['Кара Кинг', '2020', 'Научпоп'],
+					author: 'Кара Кинг',
+					year: '2020',
+					genre: 'Научпоп',
 				},
 				{
 					id: 3,
 					title: 'Чистый код: создание, анализ и рефакторинг',
-					keywords: ['Роберт Мартин', '2008'],
+					author: 'Роберт Мартин',
+					year: '2008',
+					genre: '',
 				},
 			],
 		}
@@ -37,6 +43,9 @@ export default createStore({
 		closeEditPopup(state) {
 			state.isEditPopupOpen = false
 		},
+		addBook(state, newBook) {
+			state.books.push(newBook)
+			state.isAddPopupOpen = false
+		},
 	},
-	actions: {},
 })

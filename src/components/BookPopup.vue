@@ -17,25 +17,25 @@
       </div>
       <div class="popup__item">
         <label class="item__title">Название</label>
-        <input type="text" class="item__input" placeholder="Название произведения">
+        <input type="text" class="item__input" placeholder="Название произведения" v-model="bookTitle">
       </div>
       <div class="popup__item">
         <label class="item__title">Автор</label>
-        <input type="text" class="item__input" placeholder="Имя и фамилия автора">
+        <input type="text" class="item__input" placeholder="Имя и фамилия автора" v-model="bookAuthor">
       </div>
       <div class="popup__item">
         <label class="item__title">Год</label>
-        <input type="text" class="item__input" placeholder="Год выпуска">
+        <input type="text" class="item__input" placeholder="Год выпуска" v-model="bookYear">
       </div>
       <div class="popup__item">
         <label class="item__title">Жанр</label>
-        <input type="text" class="item__input" placeholder="Добавьте жанр произведения">
+        <input type="text" class="item__input" placeholder="Добавьте жанр произведения" v-model="bookGenre">
       </div>
       <div class="popup__checkbox-item">
         <input type="checkbox" id="checkbox" class="checkbox">
         <label for="checkbox" class="checkbox__title">Я согласен с условиями Политики конфиденциальности</label>
       </div>
-      <button class="popup__done" v-if="store.state.isAddPopupOpen">
+      <button class="popup__done" v-if="store.state.isAddPopupOpen" @click="addBook">
         <img src="../assets/icons/add.svg">
         Добавить
       </button>
@@ -53,6 +53,7 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import store from '../store/index.js';
 
 function closeAddPopup() {
@@ -60,6 +61,21 @@ function closeAddPopup() {
 }
 function closeEditPopup() {
   store.commit('closeEditPopup')
+}
+
+const bookTitle = ref('')
+const bookAuthor = ref('')
+const bookYear = ref('')
+const bookGenre = ref('')
+function addBook() {
+  const book = {
+    id: store.state.books.length + 1,
+    title: bookTitle.value,
+    author: bookAuthor.value,
+    year: bookYear.value,
+    genre: bookGenre.value
+  }
+  store.commit('addBook', book)
 }
 </script>
 

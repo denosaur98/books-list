@@ -7,7 +7,9 @@
       </button>
     </div>
     <div class="item__info">
-      <p class="info__element" v-for="(keywords, index) in book.keywords" :key="index">{{ keywords }}</p>
+      <p class="info__element">{{ book.author }}</p>
+      <p class="info__element">{{ book.year }}</p>
+      <p class="info__element">{{ book.genre }}</p>
     </div>
   </div>
 </template>
