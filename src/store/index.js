@@ -56,5 +56,12 @@ export default createStore({
 			}
 			state.isEditPopupOpen = false
 		},
+		removeBook(state, removedBook) {
+			const index = state.books.findIndex(book => book.id === removedBook.id)
+			if (index !== -1) {
+				state.books.splice(index, 1)
+			}
+			state.isEditPopupOpen = false
+		},
 	},
 })

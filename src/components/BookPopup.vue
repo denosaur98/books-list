@@ -44,7 +44,7 @@
           <img src="../assets/icons/add.svg">
           Сохранить
         </button>
-        <button class="popup__delete">
+        <button class="popup__delete" @click="removeBook">
           <img src="../assets/icons/trash.svg">
         </button>
       </div>
@@ -98,6 +98,9 @@ function saveChanges() {
     }
     store.commit('updateBook', updatedBook)
   }
+}
+function removeBook() {
+  store.commit('removeBook', store.state.selectedBook)
 }
 </script>
 
