@@ -5,7 +5,10 @@
         <div class="header__search-wrapper">
           <img src="../assets/icons/logo.svg" class="search__logo">
           <div class="search__item-wrapper">
-            <img src="../assets/icons/search.svg" class="item__icon">
+            <img src="../assets/icons/search.svg" class="item__icon" v-if="searchValue === ''">
+            <button class="item__clean-button" @click="clearSearch" v-else>
+              <img src="../assets/icons/close.svg">
+            </button>
             <input type="text" placeholder="Найти ту самую книгу" class="search__item" v-model="searchValue">
           </div>
         </div>
@@ -44,6 +47,9 @@ const searchItems = computed(() => {
     return book.title.toLowerCase().includes(searchValue.value.toLowerCase())
   })
 })
+function clearSearch() {
+  searchValue.value = ''
+}
 </script>
 
 <style lang="scss" scoped>
@@ -89,6 +95,13 @@ const searchItems = computed(() => {
 
           .item__icon {
             margin: 0 0 0 12px;
+          }
+
+          .item__clean-button {
+            cursor: pointer;
+            border: none;
+            background: none;
+            margin: 3px 0 0 12px;
           }
 
           .search__item {
