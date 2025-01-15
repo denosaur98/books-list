@@ -1,20 +1,19 @@
 <template>
-  <div class="book-item">
+  <div class="book-item" v-for="book in store.state.books" :key="book.id">
     <div class="item__header">
-      <h1 class="header__title">Как разговаривать с кем угодно, когда угодно, где угодно</h1>
+      <h1 class="header__title">{{ book.title }}</h1>
       <button class="header__edit">
         <img src="../assets/icons/edit.svg">
       </button>
     </div>
     <div class="item__info">
-      <p class="info__element">Ларри Кинг</p>
-      <p class="info__element">2011</p>
-      <p class="info__element">Научпоп</p>
+      <p class="info__element" v-for="(keywords, index) in book.keywords" :key="index">{{ keywords }}</p>
     </div>
   </div>
 </template>
 
 <script setup>
+import store from '../store/index.js';
 
 </script>
 
