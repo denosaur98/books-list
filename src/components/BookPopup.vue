@@ -6,7 +6,7 @@
       <div class="popup__header-wrapper">
         <div class="popup__header">
           <h1 class="header__title">{{ store.state.isAddPopupOpen ? "Добавить книгу" : "Редактирование" }}</h1>
-          <p class="header__subtitle">Заполните все поля и добавьте книгу в список</p>
+          <p class="header__subtitle">{{ store.state.isAddPopupOpen ? "Заполните все поля и добавьте книгу в список" : "Внесите изменение в карточке" }}</p>
         </div>
         <button class="header__close-popup" @click="closeAddPopup" v-if="store.state.isAddPopupOpen">
           <img src="../assets/icons/close.svg">
@@ -35,10 +35,19 @@
         <input type="checkbox" id="checkbox" class="checkbox">
         <label for="checkbox" class="checkbox__title">Я согласен с условиями Политики конфиденциальности</label>
       </div>
-      <button class="popup__done">
+      <button class="popup__done" v-if="store.state.isAddPopupOpen">
         <img src="../assets/icons/add.svg">
         Добавить
       </button>
+      <div class="popup__buttons-wrapper" v-else>
+        <button class="popup__done">
+          <img src="../assets/icons/add.svg">
+          Сохранить
+        </button>
+        <button class="popup__delete">
+          <img src="../assets/icons/trash.svg">
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -206,6 +215,25 @@ function closeEditPopup() {
       @media (max-width: 480px) {
         width: 100%;
       }
+    }
+
+    .popup__delete {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: rgb(245, 246, 246);
+      border-radius: 8px;
+    }
+
+    .popup__buttons-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
     }
   }
 }
