@@ -5,6 +5,7 @@ export default createStore({
 		return {
 			isAddPopupOpen: false,
 			isEditPopupOpen: false,
+			selectedBook: null,
 			books: [
 				{
 					id: 1,
@@ -37,7 +38,8 @@ export default createStore({
 		closeAddPopup(state) {
 			state.isAddPopupOpen = false
 		},
-		openEditPopup(state) {
+		openEditPopup(state, id) {
+			state.selectedBook = state.books.find(book => book.id === id)
 			state.isEditPopupOpen = true
 		},
 		closeEditPopup(state) {
@@ -46,6 +48,13 @@ export default createStore({
 		addBook(state, newBook) {
 			state.books.push(newBook)
 			state.isAddPopupOpen = false
+		},
+		updateBook(state, updatedBook) {
+			const index = state.books.findIndex(book => book.id === updatedBook.id)
+			if (index !== -1) {
+				state.books.splice(index, 1, updatedBook)
+			}
+			state.isEditPopupOpen = false
 		},
 	},
 })

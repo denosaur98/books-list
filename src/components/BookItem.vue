@@ -2,7 +2,7 @@
   <div class="book-item" v-for="book in props.searchItems" :key="book.id">
     <div class="item__header">
       <h1 class="header__title">{{ book.title }}</h1>
-      <button class="header__edit" @click="openEditPopup">
+      <button class="header__edit" @click="openEditPopup(book.id)">
         <img src="../assets/icons/edit.svg">
       </button>
     </div>
@@ -18,8 +18,8 @@
 import { defineProps } from 'vue';
 import store from '../store/index.js';
 
-function openEditPopup() {
-  store.commit('openEditPopup')
+function openEditPopup(id) {
+  store.commit('openEditPopup', id)
 }
 
 const props = defineProps({

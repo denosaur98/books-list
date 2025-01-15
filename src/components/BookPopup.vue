@@ -40,7 +40,7 @@
         Добавить
       </button>
       <div class="popup__buttons-wrapper" v-else>
-        <button class="popup__done">
+        <button class="popup__done" @click="saveChanges">
           <img src="../assets/icons/add.svg">
           Сохранить
         </button>
@@ -53,7 +53,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import store from '../store/index.js';
 
 function closeAddPopup() {
@@ -76,6 +76,28 @@ function addBook() {
     genre: bookGenre.value
   }
   store.commit('addBook', book)
+}
+
+watch(() => store.state.selectedBook, (newBook) => {
+  if (store.state.isEditPopupOpen && newBook) {
+    bookTitle.value = newBook.title
+    bookAuthor.value = newBook.author
+    bookYear.value = newBook.year
+    bookGenre.value = newBook.genre
+  }
+}, { immediate: true })
+
+function saveChanges() {
+  if (store.state.selectedBook) {
+    const updatedBook = {
+      id: store.state.selectedBook.id,
+      title: bookTitle.value,
+      author: bookAuthor.value,
+      year: bookYear.value,
+      genre: bookGenre.value
+    }
+    store.commit('updateBook', updatedBook)
+  }
 }
 </script>
 
