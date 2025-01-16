@@ -14,7 +14,7 @@
         </div>
         <div class="header__info-wrapper">
           <h1 class="info__title">
-            Книги в каталоге
+            {{ wordDeclination(store.state.books.length, "книга") }} в каталоге
             <span class="info__count">{{ store.state.books.length }}</span>
           </h1>
           <button class="info__add-book" @click="openAddPopup">
@@ -37,6 +37,7 @@ import { ref, computed } from 'vue';
 import store from '../store/index.js';
 import BookItem from './BookItem';
 import BookPopup from './BookPopup';
+import wordDeclination from '../helpers/wordDeclination.js';
 
 function openAddPopup() {
   store.commit('openAddPopup')
