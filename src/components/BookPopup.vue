@@ -307,7 +307,7 @@ function handleYearInput(event) {
           color: rgb(112, 119, 134);
         }
 
-        &.error__item-input {border: 1px solid rgb(144, 11, 9);}
+        &.error__item-input {border: 2px solid rgb(144, 11, 9);}
       }
 
       .error__text {
