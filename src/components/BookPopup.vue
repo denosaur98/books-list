@@ -136,6 +136,33 @@ watch(() => store.state.selectedBook, (newBook) => {
 }, { immediate: true })
 
 function saveChanges() {
+  isSubmitted.value = true;
+  errors.value = {
+    title: '',
+    author: '',
+    year: '',
+    genre: ''
+  }
+  let isValid = true
+  if (!bookTitle.value) {
+    errors.value.title = 'Введите название книги'
+    isValid = false
+  }
+  if (!bookAuthor.value) {
+    errors.value.author = 'Введите автора книги'
+    isValid = false
+  }
+  if (!bookYear.value) {
+    errors.value.year = 'Введите год выпуска книги'
+    isValid = false
+  }
+  if (!bookGenre.value) {
+    errors.value.genre = 'Введите жанр книги'
+    isValid = false
+  }
+  if (!isValid) {
+    return
+  }
   if (store.state.selectedBook) {
     const updatedBook = {
       id: store.state.selectedBook.id,
