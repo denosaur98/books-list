@@ -13,10 +13,11 @@
           </div>
         </div>
         <div class="header__info-wrapper">
-          <h1 class="info__title">
+          <h1 class="info__title" v-if="searchValue === ''">
             {{ wordDeclination(store.state.books.length, "книга") }} в каталоге
             <span class="info__count">{{ store.state.books.length }}</span>
           </h1>
+          <h1 class="info__title" v-else>Книги по запросу <span class="title__subtext">«{{ searchValue }}»</span></h1>
           <button class="info__add-book" @click="openAddPopup">
             <img src="../assets/icons/add.svg">
             Добавить книгу
@@ -141,6 +142,10 @@ function clearSearch() {
           .info__count {
             color: rgb(112, 119, 134);
             margin-left: 10px;
+          }
+
+          .title__subtext {
+            color: rgb(112, 119, 134);
           }
         }
 
