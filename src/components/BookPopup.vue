@@ -33,7 +33,7 @@
       </div>
       <div class="popup__checkbox-item">
         <input type="checkbox" id="checkbox" class="checkbox">
-        <label for="checkbox" class="checkbox__title">Я согласен с условиями Политики конфиденциальности</label>
+        <label for="checkbox" class="checkbox__title">Я согласен с условиями <RouterLink to="#">Политики конфиденциальности</RouterLink></label>
       </div>
       <button class="popup__done" v-if="store.state.isAddPopupOpen" @click="addBook">
         <img src="../assets/icons/add.svg">
@@ -44,23 +44,28 @@
           <img src="../assets/icons/add.svg">
           Сохранить
         </button>
-        <button class="popup__delete" @click="removeBook">
+        <button class="popup__delete" @click="openConfirmPopup">
           <img src="../assets/icons/trash.svg">
         </button>
       </div>
     </div>
+    <ConfirmPopup v-if="store.state.isConfirmPopupOpen"/>
   </div>
 </template>
 
 <script setup>
 import { ref, watch } from 'vue';
 import store from '../store/index.js';
+import ConfirmPopup from './ConfirmPopup.vue';
 
 function closeAddPopup() {
   store.commit('closeAddPopup')
 }
 function closeEditPopup() {
   store.commit('closeEditPopup')
+}
+function openConfirmPopup() {
+  store.commit('openConfirmPopup')
 }
 
 const bookTitle = ref('')
@@ -99,9 +104,6 @@ function saveChanges() {
     store.commit('updateBook', updatedBook)
   }
 }
-function removeBook() {
-  store.commit('removeBook', store.state.selectedBook)
-}
 </script>
 
 <style lang="scss" scoped>
@@ -115,7 +117,7 @@ function removeBook() {
     position: fixed;
     width: 100%;
     height: 100%;
-    z-index: 998;
+    z-index: 996;
     background: rgba(0, 0, 0, 0.5);
     top: 0;
     left: 0;
@@ -127,11 +129,10 @@ function removeBook() {
     flex-direction: column;
     padding: 32px;
     width: 465px;
-    z-index: 999;
+    z-index: 997;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #fff;
     border: 2px solid rgb(245, 246, 246);
     border-radius: 16px;
     background: rgb(255, 255, 255);
@@ -221,6 +222,7 @@ function removeBook() {
       .checkbox {
         width: 15px;
         height: 15px;
+        accent-color: rgb(28, 125, 65);
       }
 
       .checkbox__title {
@@ -231,6 +233,11 @@ function removeBook() {
         line-height: 100%;
         letter-spacing: 0px;
         text-align: left;
+
+        a {
+          color: rgb(112, 119, 134);
+          text-underline-offset: 3px;
+        }
       }
     }
 
@@ -268,6 +275,10 @@ function removeBook() {
       border: none;
       background: rgb(245, 246, 246);
       border-radius: 8px;
+
+      &:hover img {
+        filter: brightness(0) saturate(100%) invert(15%) sepia(89%) saturate(2894%) hue-rotate(349deg) brightness(88%) contrast(109%);
+      }
     }
 
     .popup__buttons-wrapper {

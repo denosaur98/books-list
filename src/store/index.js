@@ -5,6 +5,7 @@ export default createStore({
 		return {
 			isAddPopupOpen: false,
 			isEditPopupOpen: false,
+			isConfirmPopupOpen: false,
 			selectedBook: null,
 			books: [
 				{
@@ -45,6 +46,12 @@ export default createStore({
 		closeEditPopup(state) {
 			state.isEditPopupOpen = false
 		},
+		openConfirmPopup(state) {
+			state.isConfirmPopupOpen = true
+		},
+		closeConfirmPopup(state) {
+			state.isConfirmPopupOpen = false
+		},
 		addBook(state, newBook) {
 			state.books.push(newBook)
 			state.isAddPopupOpen = false
@@ -62,6 +69,7 @@ export default createStore({
 				state.books.splice(index, 1)
 			}
 			state.isEditPopupOpen = false
+			state.isConfirmPopupOpen = false
 		},
 	},
 })
