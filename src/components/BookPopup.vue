@@ -36,7 +36,7 @@
         <p class="error__text" v-if="isSubmitted && errors.genre">{{ errors.genre }}</p>
       </div>
       <div class="popup__checkbox-item">
-        <input type="checkbox" id="checkbox" class="checkbox">
+        <input type="checkbox" id="checkbox" class="checkbox" :class="{ 'error__checkbox': isSubmitted && errors.checkbox }" v-model="isCheckboxChecked">
         <label for="checkbox" class="checkbox__title">Я согласен с условиями <RouterLink to="#">Политики конфиденциальности</RouterLink></label>
       </div>
       <button class="popup__done" v-if="store.state.isAddPopupOpen" @click="addBook">
@@ -78,11 +78,13 @@ const bookAuthor = ref('')
 const bookYear = ref('')
 const bookGenre = ref('')
 const isSubmitted = ref(false)
+const isCheckboxChecked = ref(false)
 const errors = ref({
   title: '',
   author: '',
   year: '',
-  genre: ''
+  genre: '',
+  checkbox: ''
 })
 function addBook() {
   isSubmitted.value = true;
@@ -109,6 +111,10 @@ function addBook() {
     errors.value.genre = 'Введите жанр книги'
     isValid = false
   }
+  if (!isCheckboxChecked.value) {
+    errors.value.checkbox = true
+    isValid = false
+  }
   if (!isValid) {
     return
   }
@@ -125,6 +131,7 @@ function addBook() {
   bookYear.value = ''
   bookGenre.value = ''
   isSubmitted.value = false
+  isCheckboxChecked.value = false
 }
 
 watch(() => store.state.selectedBook, (newBook) => {
@@ -159,6 +166,10 @@ function saveChanges() {
   }
   if (!bookGenre.value) {
     errors.value.genre = 'Введите жанр книги'
+    isValid = false
+  }
+  if (!isCheckboxChecked.value) {
+    errors.value.checkbox = true
     isValid = false
   }
   if (!isValid) {
@@ -309,6 +320,11 @@ function handleYearInput(event) {
         width: 15px;
         height: 15px;
         accent-color: rgb(28, 125, 65);
+
+        &.error__checkbox {
+          outline: 1px solid rgb(144, 11, 9);
+          outline-offset: -1px;
+        }
       }
 
       .checkbox__title {
