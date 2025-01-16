@@ -167,7 +167,7 @@ function clearSearch() {
           gap: 5px;
 
           @media (max-width: 480px) {
-            position: absolute;
+            position: fixed;
             bottom: 15px;
             width: 90%;
             left: 50%;
