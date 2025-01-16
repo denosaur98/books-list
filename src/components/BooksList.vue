@@ -95,6 +95,14 @@ function clearSearch() {
           width: 100%;
           background: #fff;
           border-radius: 8px;
+          border: 2px solid #fff;
+          transition: .3s;
+
+          @media (hover: hover) {
+            &:hover {
+              border: 2px solid rgb(28, 125, 65);
+            }
+          }
 
           .item__icon {
             margin: 0 0 0 12px;

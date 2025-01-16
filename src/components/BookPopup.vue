@@ -286,7 +286,7 @@ function handleYearInput(event) {
 
       .item__input {
         width: 100%;
-        border: 1px solid rgb(245, 246, 246);
+        border: 2px solid rgb(245, 246, 246);
         font-size: 14px;
         font-weight: 400;
         line-height: 150%;
@@ -295,6 +295,13 @@ function handleYearInput(event) {
         padding: 10px 12px;
         border-radius: 8px;
         background: rgb(245, 246, 246);
+        transition: .3s;
+
+        @media (hover: hover) {
+          &:hover {
+            border: 2px solid rgb(28, 125, 65);
+          }
+        }
       
         &::placeholder {
           color: rgb(112, 119, 134);
