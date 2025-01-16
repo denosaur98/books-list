@@ -17,19 +17,23 @@
       </div>
       <div class="popup__item">
         <label class="item__title">Название</label>
-        <input type="text" class="item__input" placeholder="Название произведения" v-model="bookTitle">
+        <input type="text" class="item__input" :class="{ 'error__item-input': isSubmitted && errors.title }" placeholder="Название произведения" v-model="bookTitle">
+        <p class="error__text" v-if="isSubmitted && errors.title">{{ errors.title }}</p>
       </div>
       <div class="popup__item">
         <label class="item__title">Автор</label>
-        <input type="text" class="item__input" placeholder="Имя и фамилия автора" v-model="bookAuthor">
+        <input type="text" class="item__input" :class="{ 'error__item-input': isSubmitted && errors.author }" placeholder="Имя и фамилия автора" v-model="bookAuthor">
+        <p class="error__text" v-if="isSubmitted && errors.author">{{ errors.author }}</p>
       </div>
       <div class="popup__item">
         <label class="item__title">Год</label>
-        <input type="number" class="item__input" placeholder="Год выпуска" v-model="bookYear">
+        <input type="number" class="item__input" :class="{ 'error__item-input': isSubmitted && errors.year }" placeholder="Год выпуска" v-model="bookYear">
+        <p class="error__text" v-if="isSubmitted && errors.year">{{ errors.year }}</p>
       </div>
       <div class="popup__item">
         <label class="item__title">Жанр</label>
-        <input type="text" class="item__input" placeholder="Добавьте жанр произведения" v-model="bookGenre">
+        <input type="text" class="item__input" :class="{ 'error__item-input': isSubmitted && errors.genre }" placeholder="Добавьте жанр произведения" v-model="bookGenre">
+        <p class="error__text" v-if="isSubmitted && errors.genre">{{ errors.genre }}</p>
       </div>
       <div class="popup__checkbox-item">
         <input type="checkbox" id="checkbox" class="checkbox">
@@ -72,7 +76,41 @@ const bookTitle = ref('')
 const bookAuthor = ref('')
 const bookYear = ref('')
 const bookGenre = ref('')
+const isSubmitted = ref(false)
+const errors = ref({
+  title: '',
+  author: '',
+  year: '',
+  genre: ''
+})
 function addBook() {
+  isSubmitted.value = true;
+  errors.value = {
+    title: '',
+    author: '',
+    year: '',
+    genre: ''
+  }
+  let isValid = true
+  if (!bookTitle.value) {
+    errors.value.title = 'Введите название книги'
+    isValid = false
+  }
+  if (!bookAuthor.value) {
+    errors.value.author = 'Введите автора книги'
+    isValid = false
+  }
+  if (!bookYear.value) {
+    errors.value.year = 'Введите год выпуска книги'
+    isValid = false
+  }
+  if (!bookGenre.value) {
+    errors.value.genre = 'Введите жанр книги'
+    isValid = false
+  }
+  if (!isValid) {
+    return
+  }
   const book = {
     id: store.state.books.length + 1,
     title: bookTitle.value,
@@ -81,6 +119,11 @@ function addBook() {
     genre: bookGenre.value
   }
   store.commit('addBook', book)
+  bookTitle.value = ''
+  bookAuthor.value = ''
+  bookYear.value = ''
+  bookGenre.value = ''
+  isSubmitted.value = false
 }
 
 watch(() => store.state.selectedBook, (newBook) => {
@@ -183,6 +226,7 @@ function saveChanges() {
     }
 
     .popup__item {
+      position: relative;
       display: flex;
       flex-direction: column;
       gap: 5px;
@@ -198,7 +242,7 @@ function saveChanges() {
 
       .item__input {
         width: 100%;
-        border: none;
+        border: 1px solid rgb(245, 246, 246);
         font-size: 14px;
         font-weight: 400;
         line-height: 150%;
@@ -211,6 +255,15 @@ function saveChanges() {
         &::placeholder {
           color: rgb(112, 119, 134);
         }
+
+        &.error__item-input {border: 1px solid rgb(144, 11, 9);}
+      }
+
+      .error__text {
+        position: absolute;
+        color: rgb(144, 11, 9);
+        font-size: 12px;
+        bottom: -13px;
       }
     }
 
