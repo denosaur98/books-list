@@ -25,6 +25,7 @@
       </div>
     </div>
     <div class="list__place">
+      <p class="place__no-results" v-if="searchItems.length === 0 && searchValue !== ''">По вашему запросу ничего не найдено.</p>
       <BookItem :searchItems="searchItems"/>
     </div>
     <BookPopup v-if="store.state.isAddPopupOpen || store.state.isEditPopupOpen"/>
@@ -177,6 +178,15 @@ function clearSearch() {
     flex-direction: column;
     padding: 15px 40px;
     gap: 15px;
+
+    .place__no-results {
+      color: rgb(112, 119, 134);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 120%;
+      letter-spacing: 0%;
+      text-align: left;
+    }
 
     @media (max-width: 480px) {
       padding: 30px;
