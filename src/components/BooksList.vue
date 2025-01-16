@@ -15,7 +15,7 @@
         <div class="header__info-wrapper">
           <h1 class="info__title">
             Книги в каталоге
-            <span class="info__count">3</span>
+            <span class="info__count">{{ store.state.books.length }}</span>
           </h1>
           <button class="info__add-book" @click="openAddPopup">
             <img src="../assets/icons/add.svg">

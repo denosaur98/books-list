@@ -27,7 +27,7 @@
       </div>
       <div class="popup__item">
         <label class="item__title">Год</label>
-        <input type="number" class="item__input" :class="{ 'error__item-input': isSubmitted && errors.year }" placeholder="Год выпуска" v-model="bookYear">
+        <input type="number" class="item__input" :class="{ 'error__item-input': isSubmitted && errors.year }" placeholder="Год выпуска" v-model="bookYear" @input="handleYearInput">
         <p class="error__text" v-if="isSubmitted && errors.year">{{ errors.year }}</p>
       </div>
       <div class="popup__item">
@@ -61,6 +61,7 @@
 import { ref, watch } from 'vue';
 import store from '../store/index.js';
 import ConfirmPopup from './ConfirmPopup.vue';
+import yearMask from '../helpers/yearMask.js'
 
 function closeAddPopup() {
   store.commit('closeAddPopup')
@@ -173,6 +174,11 @@ function saveChanges() {
     }
     store.commit('updateBook', updatedBook)
   }
+}
+
+function handleYearInput(event) {
+  yearMask(event)
+  bookYear.value = event.target.value
 }
 </script>
 
