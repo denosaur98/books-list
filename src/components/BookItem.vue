@@ -40,6 +40,10 @@ const props = defineProps({
   gap: 10px;
   padding: 15px;
 
+  &:last-child {
+    margin-bottom: 60px;
+  }
+
   .item__header {
     display: flex;
     align-items: center;

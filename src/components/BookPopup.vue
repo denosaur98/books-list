@@ -384,6 +384,7 @@ function handleYearInput(event) {
       border: none;
       background: rgb(245, 246, 246);
       border-radius: 8px;
+      min-width: 40px;
 
       &:hover img {
         filter: brightness(0) saturate(100%) invert(15%) sepia(89%) saturate(2894%) hue-rotate(349deg) brightness(88%) contrast(109%);
